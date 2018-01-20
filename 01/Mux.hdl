@@ -3,7 +3,7 @@
 // by Nisan and Schocken, MIT Press.
 // File name: projects/01/Mux.hdl
 
-/** 
+/** -- static 1 hazard free mux implementation
  * Multiplexor:
  * out = a if sel == 0
  *       b otherwise
@@ -14,5 +14,10 @@ CHIP Mux {
     OUT out;
 
     PARTS:
-    // Put your code here:
+    And(a=a, b=b, out=c1);
+    And(a=b, b=sel, out=c2);
+    Not(in=sel, out=c3);
+    Or(a=c1, b=c2, out=c4);
+    And(a=c3, b=a, out=c5);
+    Or(a=c4, b=c5, out=out); 
 }
